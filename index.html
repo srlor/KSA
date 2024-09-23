@@ -1,87 +1,101 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- تحديد ترميز النص وضبط عرض الصفحة -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مشاركات طلاب ثانوية الملك عبد العزيز</title>
+    <!-- ربط ملفات الخطوط والتنسيق الخارجي -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- عنوان الصفحة -->
+    <!-- عنوان رئيسي للصفحة -->
     <h1>مشاركات طلاب ثانوية الملك عبد العزيز</h1>
 
     <!-- قسم البحث -->
-    <div class="search-section">
-        <input type="text" id="searchInput" placeholder="ابحث عن الاسم">
-        <select id="sectionFilter">
-            <option value="">فلتر الشعب</option>
-            <option value="1">الشعبة 1</option>
-            <option value="2">الشعبة 2</option>
-            <option value="3">الشعبة 3</option>
-            <option value="4">الشعبة 4</option>
-        </select>
-        <select id="gradeFilter">
-            <option value="">فلتر الصفوف</option>
-            <option value="أولى ثانوي">أولى ثانوي</option>
-            <option value="ثانية ثانوي">ثانية ثانوي</option>
-            <option value="ثالث ثانوي">ثالث ثانوي</option>
-        </select>
-        <select id="typeFilter">
-            <option value="">فلتر المحتوى</option>
-            <option value="video">فيديو</option>
-            <option value="image">صورة</option>
-        </select>
-        <div class="search-btn-container">
-            <button onclick="filterContributions()">بحث</button>
-        </div>
-    </div>
+<div class="search-section">
+    <!-- حقل الإدخال للبحث عن اسم -->
+    <input type="text" id="searchInput" placeholder="ابحث عن الاسم">
+    
+    <!-- الفلترة حسب الشعبة -->
+    <select id="sectionFilter">
+        <option value="">فلتر الشعب</option>
+        <option value="1">الشعبة 1</option>
+        <option value="2">الشعبة 2</option>
+        <option value="3">الشعبة 3</option>
+        <option value="4">الشعبة 4</option>
+    </select>
 
-    <!-- مربع الفيديو -->
+    <!-- الفلترة حسب الصف الدراسي -->
+    <select id="gradeFilter">
+        <option value="">فلتر الصفوف</option>
+        <option value="أولى ثانوي">أولى ثانوي</option>
+        <option value="ثانية ثانوي">ثانية ثانوي</option>
+        <option value="ثالث ثانوي">ثالث ثانوي</option>
+    </select>
+
+    <!-- الفلترة حسب نوع المحتوى -->
+    <select id="typeFilter">
+        <option value="">فلتر المحتوى</option>
+        <option value="video">فيديو</option>
+        <option value="image">صورة</option>
+    </select>
+
+    <!-- زر البحث -->
+    <div class="search-btn-container">
+        <button onclick="filterContributions()">بحث</button>
+    </div>
+</div>
+
+    <!-- عرض الفيديو -->
     <div class="contribution" data-type="video" data-name="شادي رفيق" data-grade="ثالث ثانوي" data-section="1">
         <video controls>
             <source src="path_to_video.mp4" type="video/mp4">
             متصفحك لا يدعم تشغيل الفيديو
         </video>
-        <p>الاسم: شادي رفيق</p>
-        <p>الصف: ثالث ثانوي</p>
-        <p>الشعبة: 1</p>
-        <button class="share-btn" onclick="shareContribution(this)">
-            <i class="fas fa-share"></i>
-        </button>
+        <div class="contribution-info">
+            <p>الاسم: <strong>شادي رفيق</strong></p>
+            <p>الصف: <strong>ثالث ثانوي</strong></p>
+            <p>الشعبة: <strong>1</strong></p>
+        </div>
     </div>
 
-    <!-- مربع الصورة -->
+    <!-- عرض الصورة -->
     <div class="contribution" data-type="image" data-name="محمد زياد" data-grade="ثالث ثانوي" data-section="1">
         <img src="path_to_image.jpg" alt="مشاركة صورة">
-        <p>الاسم: محمد زياد</p>
-        <p>الصف: ثالث ثانوي</p>
-        <p>الشعبة: 1</p>
-        <button class="share-btn" onclick="shareContribution(this)">
-            <i class="fas fa-share"></i>
-        </button>
+        <div class="contribution-info">
+            <p>الاسم: <strong>محمد زياد</strong></p>
+            <p>الصف: <strong>ثالث ثانوي</strong></p>
+            <p>الشعبة: <strong>1</strong></p>
+        </div>
     </div>
 
-    <!-- الأيقونة الثابتة -->
+    <!-- أيقونة ثابتة لعرض النافذة المنبثقة -->
     <div class="fixed-icon" onclick="showPopup()">
         <i class="fas fa-info-circle"></i>
     </div>
 
-    <!-- نافذة منبثقة -->
+    <!-- النافذة المنبثقة لعرض رسالة -->
     <div id="popup" class="popup">
         <div class="popup-content">
             <p>هذا الموقع للمشاركات لا يستخدم تخزين البيانات، لذلك لن يستطيع المستخدم رفع المشاركات في هذا بنفسه!</p>
-            <p>لكن تستطيع رفع مشروعك عبر التواصل مع:</p>
+            <p style="color: red;">لكن تستطيع رفع مشروعك عبر التواصل مع:</p>
             <div class="contact-info">
-                <a href="https://wa.me/966546999093" target="_blank">شادي رفيق</a>
-                <i class="fab fa-whatsapp"></i>
-                <a href="https://wa.me/966502944819" target="_blank">محمد زياد</a>
-                <i class="fab fa-whatsapp"></i>
+                <div class="contact-item">
+                    <a href="https://wa.me/966546999093" target="_blank">شادي رفيق</a>
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="contact-item">
+                    <a href="https://wa.me/966502944819" target="_blank">محمد زياد</a>
+                    <i class="fab fa-whatsapp"></i>
+                </div>
             </div>
             <button onclick="hidePopup()">إغلاق</button>
         </div>
     </div>
 
+    <!-- ربط ملف الجافا سكريبت -->
     <script src="script.js"></script>
 </body>
-    </html>
+</html>
